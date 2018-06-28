@@ -40,6 +40,19 @@ function post($val){
 	return false;
 }
 
+function panel($title,$html) {
+	return "<div class='panel panel-default'>
+                        <div class='panel-heading'>
+                            <i class='fa fa-bar-chart-o fa-fw'></i>$title
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class='panel-body'>
+                            $html
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>";
+}
+
 ?>
 <script src="jquery-3.3.1.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

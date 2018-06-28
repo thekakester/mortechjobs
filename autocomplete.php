@@ -132,5 +132,5 @@
 				}
 			}
 		</script>
-		<div id='autoCompleteResults' style='position: absolute; border: 1px solid black;display:none'>Loading</div>";
+		<div id='autoCompleteResults' style='position: absolute; border: 1px solid black;display:none; z-index:1000'>Loading</div>";
 ?>
