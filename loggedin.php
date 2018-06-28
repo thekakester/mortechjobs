@@ -1,6 +1,6 @@
 <?php
 	if (!$uid) {
-		echo "plz login";
+		header("Location:login.php");
 		exit();
 	}
 ?>

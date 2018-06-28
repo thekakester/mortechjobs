@@ -1,11 +1,13 @@
 <?php
 
 include_once("util.php");
+include_once('sortyTable.php');
 
 function taskList() {
 	global $conn,$uid;
+	$id = uniqueID();
 	$resultset=$conn->query("SELECT * FROM ((Select tid, MAX(id) as id from tasks GROUP BY tid) as t1 JOIN tasks as t2 ON t1.id = t2.id) WHERE owner=$uid");	//Select the most recent row for each tid (most recent is when id is the biggest)
-	$html = "<table class='table table-bordered table-hover table-striped'>";
+	$html = "<table id='$id' onload='makeSorty(this)' class='table table-bordered table-hover table-striped'>";
 	$html .= "<tr><th>Task</th>
 				<th>Description</th>
 				<th>Job</th>
@@ -24,6 +26,7 @@ function taskList() {
 			</tr>";
 	}
 	$html .= "</table>";
+	$html .= "<script>$(document).ready(function(){ makeSorty(document.getElementById('$id')) }) </script>";
 	return $html;
 }
 

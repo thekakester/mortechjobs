@@ -40,6 +40,12 @@ function post($val){
 	return false;
 }
 
+$uniqueID = 0;
+function uniqueID() {
+	global $uniqueID;
+	return "uniqueID" . $uniqueID++;
+}
+
 function panel($title,$html) {
 	return "<div class='panel panel-default'>
                         <div class='panel-heading'>
