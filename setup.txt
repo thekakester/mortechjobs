@@ -1,0 +1,5 @@
+create database mortech_jobs;
+use mortech_jobs;
+create table users(id INT AUTO_INCREMENT PRIMARY KEY, user VARCHAR(255) UNIQUE NOT NULL, pass VARCHAR(255) NOT NULL);
+CREATE TABLE permissions (id INT AUTO_INCREMENT PRIMARY KEY, utc INT NOT NULL, uid INT NOT NULL, permCreateUser BOOLEAN NOT NULL, permTest BOOLEAN NOT NULL);
+CREATE TABLE tasks (id INT AUTO_INCREMENT PRIMARY KEY, tid INT NOT NULL, jid INT, openDate INT NOT NULL, closeDate INT, dueDate INT NOT NULL, description TEXT NOT NULL, owner INT NOT NULL);
