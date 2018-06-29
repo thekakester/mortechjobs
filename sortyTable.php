@@ -16,20 +16,34 @@
 			div.onclick = (function(t,c){return function(){sortTable(t,c);};})(table,i);
 			th.appendChild(div);
 			
-			//Add the glyphicons
+			//Add the glyphicons span
 			var span = document.createElement("span");
-			span.className="glyphicon glyphicon-chevron-up sortyArrow";
 			div.appendChild(span);
 		}
 	}
 	
 	function sortTable(table,column) {
 		var tableBody = table.children[0];
+		var firstRow = tableBody.children[0];
+		
+		//hide the arrows from the last sort
+		if (tableBody.sortedColumn > -1) {
+			firstRow.children[tableBody.sortedColumn].children[0].children[0].className = "";	//Remove the glyphicon
+		}
+		
+		//Decide if we're sorting ASC or DESC
 		if (tableBody.sortedColumn == column) {
 			tableBody.sortedAsc = !tableBody.sortedAsc;
 		} else {
 			tableBody.sortedColumn = column;
 			tableBody.sortedAsc = true;
+		}
+		
+		//Add the up/down arrows to signify sort type
+		if (tableBody.sortedAsc) {
+			firstRow.children[tableBody.sortedColumn].children[0].children[0].className = "glyphicon glyphicon-chevron-up sortyArrow"
+		} else {
+			firstRow.children[tableBody.sortedColumn].children[0].children[0].className = "glyphicon glyphicon-chevron-down sortyArrow"
 		}
 		
 		while (true) {
