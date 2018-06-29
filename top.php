@@ -79,7 +79,7 @@
                             <a href="/"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Tasks</a>
+                            <a href="/alltasks.php"><i class="fa fa-bar-chart-o fa-fw"></i> Tasks</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-table fa-fw"></i> Jobs</a>
@@ -92,11 +92,5 @@
         </nav>
 
         <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Dashboard</h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
             <div class="row">
                 <div class="col-lg-8">

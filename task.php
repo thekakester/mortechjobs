@@ -6,6 +6,7 @@ include_once('autocomplete.php');
 
 
 include('top.php');
+echo head("Task Details");
 echo panel("Task Details",taskDetails());
 echo panel("Revision History",taskRevisionHistory());
 include('bottom.php');
