@@ -2,6 +2,8 @@
 	function makeSorty(table) {
 		//Make the titles clickable to sort
 		var tableBody = table.children[0];
+		tableBody.sortedColumn = -1;
+		tableBody.sortedAsc = true;
 		var firstRow = tableBody.children[0];
 
 		for (var i = 0; i < firstRow.children.length; i++) {
@@ -10,15 +12,26 @@
 			var text = document.createTextNode(th.innerText);
 			th.innerText = "";
 			div.appendChild(text);
-			div.className="myClass";
+			div.className="sortyHeader";
 			div.onclick = (function(t,c){return function(){sortTable(t,c);};})(table,i);
 			th.appendChild(div);
+			
+			//Add the glyphicons
+			var span = document.createElement("span");
+			span.className="glyphicon glyphicon-chevron-up sortyArrow";
+			div.appendChild(span);
 		}
 	}
 	
 	function sortTable(table,column) {
 		var tableBody = table.children[0];
-		var all = "";
+		if (tableBody.sortedColumn == column) {
+			tableBody.sortedAsc = !tableBody.sortedAsc;
+		} else {
+			tableBody.sortedColumn = column;
+			tableBody.sortedAsc = true;
+		}
+		
 		while (true) {
 			var sorted = true;	//true until otherwise false
 			
@@ -28,7 +41,8 @@
 				var value = getValue(table,i,column).toLowerCase();
 				
 				//Locale compare is a modern way to have your browser compare alpha-numeric strings
-				if (value.localeCompare(prevValue, undefined, {numeric: true, sensitivity: 'base'}) < 0) {
+				var comp = value.localeCompare(prevValue, undefined, {numeric: true, sensitivity: 'base'});
+				if ((tableBody.sortedAsc && comp < 0) || (!tableBody.sortedAsc && comp > 0)) {
 					moveUpOneRow(table,i);
 					sorted = false;
 				}
@@ -53,7 +67,11 @@
 </script>
 
 <style>
-.myClass:hover {
+.sortyHeader:hover {
 	cursor: pointer;
+}
+
+.sortyArrow {
+	float: right;
 }
 </style>
