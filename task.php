@@ -24,6 +24,7 @@ function taskDetails() {
 						<th>Due Date</th>
 						<th>Days Open</th>
 						<th>Owner</th>
+						<th>Edit</th>
 						</tr>";
 			
 
@@ -36,7 +37,7 @@ function taskDetails() {
 						<td>$dueDate</td>
 						<td>$daysOpen</td>
 						<td>$row[user]</td>
-						<td><span class='glyphicon glyphicon-pencil' onClick='document.getElementById(\"view\").style.display=\"none\";document.getElementById(\"edit\").style.display=\"table-row\";'>hiiiii</span></td>
+						<td><a href='#' onClick='document.getElementById(\"view\").style.display=\"none\";document.getElementById(\"edit\").style.display=\"table-row\";'><span class='glyphicon glyphicon-pencil'></span></a></td>
 					</tr>
 					<tr id='edit' style='display:none'>
 						<td>$row[tid]</td>
@@ -45,6 +46,7 @@ function taskDetails() {
 						<td><input type='text' value='$dueDate' name='dueDate'></td>
 						<td>$daysOpen</td>
 						<td>" . autoCompleteTextbox("users","value='$row[user]' name='owner'") . "</td>
+						<td><a href='#'><span class='glyphicon glyphicon-ok'></span></a></td>
 					</tr>";
 			$html .= "</table>";
 			

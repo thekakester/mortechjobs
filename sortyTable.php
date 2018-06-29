@@ -55,7 +55,7 @@
 				var value = getValue(table,i,column).toLowerCase();
 				
 				//Locale compare is a modern way to have your browser compare alpha-numeric strings
-				var comp = value.localeCompare(prevValue, undefined, {numeric: true, sensitivity: 'base'});
+				var comp = compareTo(value,prevValue);
 				if ((tableBody.sortedAsc && comp < 0) || (!tableBody.sortedAsc && comp > 0)) {
 					moveUpOneRow(table,i);
 					sorted = false;
@@ -76,6 +76,11 @@
 	function moveUpOneRow(table,row) {
 		var tableBody = table.children[0];
 		tableBody.insertBefore(tableBody.children[row],tableBody.children[row-1]);
+	}
+	
+	//NEEDED: Date sorting
+	function compareTo(a,b) {
+		return a.localeCompare(b, undefined, {numeric: true, sensitivity: 'base'});
 	}
 
 </script>
