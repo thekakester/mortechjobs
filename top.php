@@ -32,7 +32,7 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+	
 </head>
 
 <body>
@@ -79,7 +79,15 @@
                             <a href="/"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="/alltasks.php"><i class="fa fa-bar-chart-o fa-fw"></i> Tasks</a>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Tasks</a>
+							<ul class="nav nav-second-level">
+								<li>
+									<a href="/alltasks.php">All Tasks</a>
+								</li>
+								<li>
+									<a href="/addtask.php">Add Task</a>
+								</li>
+							</ul>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-table fa-fw"></i> Jobs</a>
