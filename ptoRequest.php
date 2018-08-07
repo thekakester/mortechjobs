@@ -9,7 +9,6 @@ function ptoRequestForm() {
 	
 	$id = uniqueID();
 	
-	
 	$user = new User($uid);
 	$manager = $user->manager;
 	
