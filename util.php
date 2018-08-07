@@ -6,6 +6,7 @@ $conn=new mysqli();
 $conn->connect("127.0.0.1","root",false,"mortech_jobs");
 
 $uid=session('uid');
+$__username = false;	//Gets changed when getUsername() is called
 
 if($uid){
 	$resultset=$conn->query("SELECT * FROM permissions WHERE uid=$uid ORDER BY id DESC LIMIT 1");
@@ -17,6 +18,15 @@ if($uid){
 			$_SESSION[$key]=$val;
 		}	
 	}
+}
+
+//WARNING: Not guaranteed to be unique!
+function generateToken() {
+	$token = "";
+	for ($i = 0; $i < 32; $i++) {
+		$token .= chr(rand(97,122));
+	}
+	return $token;
 }
 
 function get($val){
