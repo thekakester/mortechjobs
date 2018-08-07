@@ -3,14 +3,19 @@
 
 <head>
 
-    <meta charset="utf-8">
+	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+	
+	<script src="jquery-3.3.1.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-    <title>Mor-Tech Jobs</title>
-
+    <title>Mor-Tech Home</title>
+	<link rel="icon" href="/images/favicon.png">
+	
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -48,7 +53,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Mor-Tech Jobs</a>
+				
+                <a class="navbar-brand" href="index.php" style="width:400px;height:50px">Mor-Tech Manufacturing</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -76,10 +82,21 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="/"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="/index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        </li>
+						<li>
+                            <a href="#"><i class="fa fa-gavel"></i> Parts</a>
+							<ul class="nav nav-second-level">
+								<li>
+									<a href="/allparts.php">All Parts</a>
+								</li>
+								<li>
+									<a href="/addPart.php">Add Part</a>
+								</li>
+							</ul>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Tasks</a>
+                            <a href="#"><i class="fa fa-clipboard"></i> Tasks</a>
 							<ul class="nav nav-second-level">
 								<li>
 									<a href="/alltasks.php">All Tasks</a>
@@ -90,8 +107,30 @@
 							</ul>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-table fa-fw"></i> Jobs</a>
+                            <a href="#"><i class="fa fa-briefcase"></i> Jobs</a>
+							<ul class="nav nav-second-level">
+								<li>
+									<a href="/alljobs.php">All Jobs</a>
+								</li>
+								<li>
+									<a href="/myjobs.php">My Jobs</a>
+								</li>
+								<li>
+									<a href="/addjob.php">Add Job</a>
+								</li>
+							</ul>
                         </li>
+						<li>
+							<a href="#"><i class="fa fa-quote-right"></i> Quotes</a>
+							<ul class="nav nav-second-level">
+								<li>
+									<a href="/allquotes.php">All Quotes</a>
+								</li>
+								<li>
+									<a href="/quote.php">New Quote</a>
+								</li>
+							</ul>
+						</li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -101,4 +140,4 @@
 
         <div id="page-wrapper">
             <div class="row">
-                <div class="col-lg-8">
+                <div class="col-lg-12">
