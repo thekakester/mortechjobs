@@ -2,6 +2,9 @@
 
 session_start();
 
+//This is used when sending out emails with hyperlinks
+$server_ip = "http://168.192.1.131";
+
 $conn=new mysqli();
 $conn->connect("127.0.0.1","root",false,"mortech_jobs");
 

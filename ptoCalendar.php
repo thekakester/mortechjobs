@@ -35,8 +35,8 @@ function ptoCalendar() {
 		$html .= "<b>" . date("n/j/y",$currentDayUTC) . "</b><br><br>";
 		foreach ($day->ptoRequests as $request) {
 			$user = $request->user;
-			$color = "#EA4335";
-			if ($request->status == 1) { $color = "#34A853"; }
+			$color = "#EA4335";	//Red
+			if ($request->status == 1) { $color = "#34A853"; }	//Green
 			$html .= "<font color='$color'>$user->fName $user->lName</font><br>";
 		}
 		$html .= "</td>";
