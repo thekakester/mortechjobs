@@ -29,6 +29,10 @@ function generateToken() {
 	return $token;
 }
 
+function beginningOfDayUTC($utc) {
+	return strToTime("today",$utc);
+}
+
 function get($val){
 	if (isset($_GET[$val])){ 
 		return $_GET[$val];

@@ -11,7 +11,9 @@
 	
 	<script src="jquery-3.3.1.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="jquery-ui.multidatespicker.js"></script>
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="jquery-ui.multidatespicker.css">
 
     <title>Mor-Tech Home</title>
 	<link rel="icon" href="/images/favicon.png">

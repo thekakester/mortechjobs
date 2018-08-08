@@ -12,54 +12,64 @@ function ptoRequestForm() {
 	$user = new User($uid);
 	$manager = $user->manager;
 	
-	//Get details about the user
-	$conn->query("SELECT * FROM users WHERE id=$uid LIMIT 1");
-	
 	$html="
 			<form role='form' method='post'>
-				<label>Requestor: $user->fName $user->lName ($user->username)</label><br>
-				<label>Manager: $manager->fName $manager->lName ($manager->username)</label><br>
-				<label>Start Date</label>
-				<div class='input-group date'>
-					<input type='text' class='form-control' name='startdate' id='".$id."datetimepicker1' autocomplete='off'/>
-					<span class='input-group-addon'>
-						<span class='glyphicon glyphicon-calendar'></span>
-					</span>
-				</div>
-				<label>End Date</label>
-				<div class='input-group date'>
-					<input type='text' class='form-control' name='enddate' id='".$id."datetimepicker2' autocomplete='off'/>
-					<span class='input-group-addon'>
-						<span class='glyphicon glyphicon-calendar'></span>
-					</span>
-				</div>
+				<b>Requestor:</b> $user->fName $user->lName ($user->username)<br>
+				<b>Manager:</b> $manager->fName $manager->lName ($manager->username)<br>
+				<div id='multidate'></div>
+				<input type='text' name='dates' id='dates'>
 				<input type='submit' class='form-control'>
 			</form>
 			<script>
-				$( function() {
-					$( '#".$id."datetimepicker1' ).datepicker();
-					$( '#".$id."datetimepicker2' ).datepicker();
-				} );
+				$('#multidate').multiDatesPicker({
+					onSelect: function() {updateDates();}
+				});
+				function updateDates() {
+					$('#dates').val($('#multidate').multiDatesPicker('getDates'))
+				}
 			</script> 
 			";
 return $html;
 }
 
 
-$startdate = post("startdate");
-$enddate = post("enddate");
-if ($startdate && $enddate) {
+$datesString = post("dates");
+if ($datesString) {
+	$dates = explode(",",$datesString);
+	requestPTO($dates);
+}
+
+function requestPTO($dates) {
+	global $uid,$conn;
 	$user = new User($uid);
 	$token = generateToken();
-	$body = "$user->fName $user->lName ($user->username) has requested PTO from $startdate to $enddate<br><a href='#'>Approve</a> - <a href='#'>Deny</a>";
-	echo $body;
-	$utc = time();
-	$utc_start = strtotime($startdate);
-	$utc_end = strtotime($enddate);
 	
-	$query = "INSERT INTO pto (uid,utc,utc_start,utc_end,token) VALUES($uid,$utc,$utc_start,$utc_end,'$token')";
-	$conn->query($query);
-	echo $query;
+	$utc = time();
+	
+	//Surround this transaction in a try/catch in case
+	//something fails
+	try {
+		$conn->begin_transaction();
+		$resultSet = $conn->query("SELECT MAX(req_id) FROM pto_requests");
+		$row = $resultSet->fetch_array();
+		if (!$row) { return; }					//Early exit in case of crash
+		$req_id = $row[0];
+		if ($req_id == NULL) { $req_id = 1; }	//This returns 1 for the very first database entry ever
+		//Start inserting our days
+		foreach ($dates as $date) {
+			$date_utc = beginningOfDayUTC(strtotime($date));
+			$q = "INSERT INTO pto_requests (uid,req_id,utc,pto_utc,token) VALUES($uid,$req_id,$utc,$date_utc,'$token')";
+			$conn->query($q);
+		}
+	
+		$conn->commit();
+	} catch (Exception $e) {
+		$conn->rollback();
+		throw $e;
+	}
+	
+	$body = "$user->fName $user->lName ($user->username) has requested PTO from <br><a href='#'>Approve</a> - <a href='#'>Deny</a>";
+	echo $body;
 	//email("mdavis@mortechdesign.com","[AUTO] PTO Request for $user","");
 }
 
