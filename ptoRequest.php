@@ -16,7 +16,7 @@ function ptoRequestForm() {
 	
 	$user = new User($uid);
 	$manager = $user->manager;
-	$ptoTotals = getPTOTotals($uid);
+	$ptoTotals = getPTOTotals($uid,time());
 	$total = $ptoTotals[0] + $ptoTotals[1];
 	
 	$html="
@@ -116,7 +116,7 @@ function sendPTOEmail($dates,$token,$req_id) {
 	$body .= "</ul><br><br>";
 
 	//Print the count of used days
-	$ptoTotals = getPTOTotals($uid);
+	$ptoTotals = getPTOTotals($uid,time());
 	$total = $ptoTotals[0] + $ptoTotals[1];
 	$body .= "<table border=1><tr><th colspan=2>$user->fName's PTO totals this year</th></tr>
 	<tr><th>Approved:</th><td>$ptoTotals[1]</td></tr>
@@ -188,11 +188,19 @@ function applyAction($token,$req_id,$action) {
 	echo "<script>alert('$message')</script>";
 }
 
-function getPTOTotals($uid) {
+//Pass in time() for $now to get this year.
+//Pass in any other timestamp to get the report for that year (timestamp can be any time throughout that year.  EG 6/10/18 will result in 1/1/18-12/31/18)
+function getPTOTotals($uid,$now) {
 	global $conn;
 	
+	//Get UTC of Jan 1st at midnight of this year
+	$beginningOfToday = strtotime("today");
+	$daysThisYear = date("z");	//0-365
+	$beginningOfYear = strToTime("-$daysThisYear days",$beginningOfToday);
+	$endOfYear = strToTime("+1 year",$beginningOfYear);
+	
 	$ptoTotals = [0,0,0];	//Pending, Approved, Denied
-	$resultSet = $conn->query("SELECT COUNT(req_id),req_id FROM pto_requests WHERE uid=2 GROUP BY req_id");
+	$resultSet = $conn->query("SELECT COUNT(req_id),req_id FROM pto_requests WHERE uid=2 AND pto_utc >= $beginningOfYear AND pto_utc < $endOfYear GROUP BY req_id");
 	while ($row = $resultSet->fetch_array()) {
 		$count = $row[0];
 		$req_id = $row[1];
