@@ -1,5 +1,9 @@
 <?php 
 
+//ABSOLUTELY NO HTML OR CODE IN THIS DOCUMENT THAT GENERATES HTML!
+//This page gets included by other pages that rely on character-perfect responses!
+
+
 session_start();
 
 //This is used when sending out emails with hyperlinks
