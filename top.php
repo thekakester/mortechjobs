@@ -15,6 +15,7 @@
 	<script src="jquery-ui.multidatespicker.js"></script>
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="jquery-ui.multidatespicker.css">
+	<link rel="stylesheet" href="custom.css">
 
     <title>Mor-Tech Home</title>
 	<link rel="icon" href="/images/favicon.png">
@@ -88,7 +89,7 @@
                             <a href="/index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
 						<li>
-                            <a href="#"><i class="fa fa-gavel"></i> Parts</a>
+                            <a href="#"><i class="fa fa-puzzle-piece"></i> Parts</a>
 							<ul class="nav nav-second-level">
 								<li>
 									<a href="/allparts.php">All Parts</a>
@@ -99,7 +100,7 @@
 							</ul>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-clipboard"></i> Tasks</a>
+                            <a href="#"><i class="fa fa-list-ul"></i> Tasks</a>
 							<ul class="nav nav-second-level">
 								<li>
 									<a href="/alltasks.php">All Tasks</a>
@@ -110,7 +111,7 @@
 							</ul>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-briefcase"></i> Jobs</a>
+                            <a href="#"><i class="fa fa-industry"></i> Jobs</a>
 							<ul class="nav nav-second-level">
 								<li>
 									<a href="/alljobs.php">All Jobs</a>
@@ -134,6 +135,9 @@
 								</li>
 							</ul>
 						</li>
+						<li>
+                            <a href="/pto.php"><i class="fa fa-calendar fa-fw"></i> PTO</a>
+                        </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

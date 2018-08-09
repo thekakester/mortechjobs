@@ -18,6 +18,8 @@ function ptoRequestForm() {
 	$manager = $user->manager;
 	$ptoTotals = getPTOTotals($uid,time());
 	$total = $ptoTotals[0] + $ptoTotals[1];
+	$remaining = 10-$total;
+	if ($remaining < 0) { $remaining = 0; }	//Chart breaks with negative numbers
 	
 	$html="
 			<div class='col-lg-4 col-md-6'>
@@ -37,7 +39,9 @@ function ptoRequestForm() {
 				
 				<div id='numDays'></div>
 			</div>
-			<div class='col-lg-5 col-md-1'></div>
+			<div class='col-lg-5 col-md-1'>
+				<div id='morris-donut-chart'></div>
+			</div>
 			<script>
 				$('#multidate').multiDatesPicker({
 					onSelect: function() {updateDates();}
@@ -53,6 +57,22 @@ function ptoRequestForm() {
 					//CSV separated.  Count the ','s and add 1
 					return dateString.split(',').length;
 				}
+				$(function() {
+					Morris.Donut({
+						element: 'morris-donut-chart',
+						data: [{
+							label: 'Days Remaining',
+							value: $remaining
+						}, {
+							label: 'Pending Approval',
+							value: $ptoTotals[0]
+						}, {
+							label: 'Approved Days',
+							value: $ptoTotals[1]
+						}],
+						resize: true
+					});
+				});
 			</script> 
 			";
 return $html;

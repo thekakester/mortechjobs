@@ -18,7 +18,11 @@ function newPart() {
 	$html="<form role='form' method='post'>
 			<div class='form-group'>
                 <label>Description</label>
-                <input type='test' class='form-control' rows='3' name='description' autocomplete='off' required>
+                <input type='test' class='form-control' name='description' autocomplete='off' required>
+            </div>
+			<div class='form-group'>
+                <label>Other Names</label>
+                <textarea rows='3' class='form-control' placeholder='[One Per Line]\nExample-1\nExample-2' name='aliases'></textarea>
             </div>
 			<div class='form-group'>
 				<label>Select Part Category</label>
@@ -109,6 +113,7 @@ function emptyStringToNull($value) {
 $commonCode 		= emptyStringToNull(post("commonCode"));
 $category			= post("category");
 $description 		= post("description");
+$aliases			= post("aliases");
 $spare 				= emptyStringToNull(post("spare"));
 $cost 				= emptyStringToNull(post("cost"));
 $price 				= emptyStringToNull(post("price"));
@@ -125,16 +130,34 @@ $uom 				= post("uom");
 $vendor 			= emptyStringToNull(post("vendor"));
 
 if ($category && $description && $uom) {
-	$vendorID = 1;
-	$q = "INSERT INTO parts (category,spare,description,commonCode,vendor,vendorPartNo,vendorLeadTime,mortechLeadTime,cost,price,sd1500,sd1500s,sdx,hd2500,hdx,minOrderReq,uom) VALUES('$category',$spare,'$description',$commonCode,$vendorID,$vendorPartNo,$vendorLeadTime,$mortechLeadTime,$cost,$price,$sd1500,$sd1500s,$sdx,$hd2500,$hdx,$minOrderReq,'$uom')";
-	$result = $conn->query($q);
-	echo $q . "<br>";
-	if ($result) {
-		header("Location: allparts.php");
-	} else {
-		echo "ERROR HAS OCCURRED";
-	}
 	
+	try {
+		$vendorID = 1;
+		$q = "INSERT INTO parts (category,spare,description,commonCode,vendor,vendorPartNo,vendorLeadTime,mortechLeadTime,cost,price,sd1500,sd1500s,sdx,hd2500,hdx,minOrderReq,uom) VALUES('$category',$spare,'$description',$commonCode,$vendorID,$vendorPartNo,$vendorLeadTime,$mortechLeadTime,$cost,$price,$sd1500,$sd1500s,$sdx,$hd2500,$hdx,$minOrderReq,'$uom')";
+		$result = $conn->query($q);
+		echo $q . "<br>";
+		if ($result) {
+			header("Location: allparts.php");
+		} else {
+			echo "ERROR HAS OCCURRED";
+		}
+		
+		$partId = $conn->insert_id;
+		
+		//Split the aliases up
+		if ($aliases) {
+			$aliasArray = explode("\n",$aliases);
+			foreach ($aliasArray as $alias) {
+				$alias = trim($alias);
+				if ($alias == "") {continue;}
+				$conn->query("INSERT INTO part_aliases (partId,alias) VALUES($partId,'$alias')");
+			}
+		}
+		$conn->commit();
+	} catch (Exception $e) {
+		$conn->rollback();
+		throw $e;
+	}
 }
 ?>
 

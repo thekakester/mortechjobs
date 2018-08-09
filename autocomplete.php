@@ -14,7 +14,6 @@
 	//$autocompleteQueries['example1'] = "SELECT user FROM users WHERE user LIKE \"{0}%\" LIMIT 5";
 	//$autocompleteQueries['example2'] = "SELECT user FROM users WHERE user LIKE \"{0}%\" LIMIT 5";
 	
-	
 	$q = get("q");
 	$text = get("text");
 	if ($q) {
