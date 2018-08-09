@@ -23,9 +23,9 @@ function ptoRequestForm() {
 			<div class='col-lg-4 col-md-6'>
 				<form role='form' method='post'>
 					<b>Requestor:</b> $user->fName $user->lName ($user->username)<br>
-					<b>Manager:</b> $manager->fName $manager->lName ($manager->username)<br>
+					<b>Manager:</b> $manager->fName $manager->lName ($manager->username)<br><br>
 					<div id='multidate'></div>
-					<input type='text' name='dates' id='dates'>
+					<input type='hidden' name='dates' id='dates'>
 					<input type='submit' class='btn btn-primary'>
 				</form>
 			</div>
@@ -34,6 +34,8 @@ function ptoRequestForm() {
 				<tr><th>Approved:</th><td>$ptoTotals[1]</td></tr>
 				<tr><th>Pending:</th><td>$ptoTotals[0]</td></tr>
 				<tr><th>Total Used:</th><td>$total/10</td></tr></table>
+				
+				<div id='numDays'></div>
 			</div>
 			<div class='col-lg-5 col-md-1'></div>
 			<script>
@@ -41,7 +43,15 @@ function ptoRequestForm() {
 					onSelect: function() {updateDates();}
 				});
 				function updateDates() {
-					$('#dates').val($('#multidate').multiDatesPicker('getDates'))
+					var dateString = $('#multidate').multiDatesPicker('getDates');
+					$('#dates').val(dateString);
+					$('#numDays').html(countDates(dateString) + ' day(s) selected');
+				}
+				function countDates(dateString) {
+					dateString += '';	//Make sure it's a string
+					if (dateString.length == 0) { return 0; }
+					//CSV separated.  Count the ','s and add 1
+					return dateString.split(',').length;
 				}
 			</script> 
 			";
