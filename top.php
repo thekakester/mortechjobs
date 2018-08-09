@@ -57,7 +57,7 @@
                     <span class="icon-bar"></span>
                 </button>
 				
-                <a class="navbar-brand" href="index.php" style="width:400px;height:50px">Mor-Tech Manufacturing</a>
+                <a class="navbar-brand" href="index.php"><img src="images/MortechLogo.png"></a>
             </div>
             <!-- /.navbar-header -->
 

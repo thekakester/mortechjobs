@@ -9,6 +9,8 @@
 	*************************************************************************/
 	$autocompleteQueries = array();
 	$autocompleteQueries['users'] = "SELECT user FROM users WHERE user LIKE \"{0}%\" LIMIT 5";
+	$autocompleteQueries['vendors'] = "SELECT name FROM vendors WHERE name LIKE \"{0}%\" LIMIT 5";
+	$autocompleteQueries['uom'] = "SELECT DISTINCT uom FROM parts WHERE uom LIKE \"{0}%\" LIMIT 5";
 	//$autocompleteQueries['example1'] = "SELECT user FROM users WHERE user LIKE \"{0}%\" LIMIT 5";
 	//$autocompleteQueries['example2'] = "SELECT user FROM users WHERE user LIKE \"{0}%\" LIMIT 5";
 	
@@ -37,7 +39,7 @@
 	//$params = The properties of the textbox, such as name, class, etc
 	//$queryIndex = The index of the array at the top of this file (search for $autocompleteQueries)
 	function autoCompleteTextbox($queryIndex,$params) {
-		return "<input type='text' $params onBlur='autoCompleteBlur()' onKeyDown='autoCompleteNavigate(event,this)' onKeyUp='autoComplete(this,\"$queryIndex\")' onMouseDown='enableAutoComplete(this,\"$queryIndex\")'>";
+		return "<input type='text' autocomplete='off' $params onBlur='autoCompleteBlur()' onKeyDown='autoCompleteNavigate(event,this)' onKeyUp='autoComplete(this,\"$queryIndex\")' onMouseDown='enableAutoComplete(this,\"$queryIndex\")'>";
 	}
 	
 	echo "<script>
@@ -118,7 +120,7 @@
 					var bgColor = '#fff';
 					var textColor = '#000';
 					if (i == selectedIndex) {
-						bgColor = '#00f';
+						bgColor = '#4285F4';
 						textColor = '#fff';
 					}
 					
