@@ -6,7 +6,7 @@ session_start();
 $server_ip = "http://168.192.1.131";
 
 $conn=new mysqli();
-$conn->connect("127.0.0.1","root",false,"mortech_jobs");
+$conn->connect("localhost","portal","p0rtalPass92","mortech_jobs");
 
 $uid=session('uid');
 $__username = false;	//Gets changed when getUsername() is called
