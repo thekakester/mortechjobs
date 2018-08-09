@@ -1,10 +1,10 @@
 INSERT INTO `users` (`id`, `user`, `pass`, `fName`, `lName`, `email`, `title`) 
 VALUES (NULL, 'admin', '$1$Ps0.si..$3neZ3eo4CsklBes3TNc8U1', 'System', 'Administrator', 'sclements@mortechdesign.com', 'System Administrator'), 
+(NULL, 'sclements', '$1$nF5.kw2.$DWuQdaRNUHnQuKwn1tXKB.', 'Sarah', 'Clements', 'sclements@mortechdesign.com', 'Project Manager'),
+(NULL, 'mdavis', '$1$M20.lR/.$OXzcvXDLYnG1AF6Uxys9P0', 'Mitchel', 'Davis', 'mdavis@mortechdesign.com', 'I.T. / R&D'), 
 (NULL, 'dclark', '$1$MI5.lh3.$O3Feuq9aCYqA7c6nAbnde1', 'Dave', 'Clark', 'dclark2@mortechdesign.com', 'Owner / President'), 
 (NULL, 'lchacko', '$1$Kp..L5/.$/YO4DVBIJgL15mutMBBp20', 'Larine', 'Chacko', 'lchacko@mortechdesign.com', 'Owner / VP'), 
-(NULL, 'ssmith', '$1$hq1.WX0.$7gUXbEPDTpS.aBD6M/j9t1', 'Scott', 'Smith', 'ssmith@mortechdesign.com', 'Project Manager'), 
-(NULL, 'sclements', '$1$nF5.kw2.$DWuQdaRNUHnQuKwn1tXKB.', 'Sarah', 'Clements', 'sclements@mortechdesign.com', 'Project Manager'), 
+(NULL, 'ssmith', '$1$hq1.WX0.$7gUXbEPDTpS.aBD6M/j9t1', 'Scott', 'Smith', 'ssmith@mortechdesign.com', 'Project Manager'),  
 (NULL, 'ncadarean', '$1$.6/.tc3.$LP7ZpG4debLTUsVMjy61U.', 'Nick', 'Cadarean', 'ncadarean@mortechdesign.com', 'Tooling Sales Manager'), 
 (NULL, 'dmorris', '$1$i25.DH4.$LmPkVOLyzXhYYBygPBNci/', 'Dave', 'Morris', 'dmorris@mortechdesign.com', 'Mechanical Engineering Manager'), 
-(NULL, 'mdavis', '$1$M20.lR/.$OXzcvXDLYnG1AF6Uxys9P0', 'Mitchel', 'Davis', 'mdavis@mortechdesign.com', 'I.T. / R&D'), 
 (NULL, 'jswiderski', '$1$yV5.T54.$oEncgj9iFOlN86GM3aGFV/', 'Justyne', 'Swiderski', 'jswiderski@mortechdesign.com', 'Financial Analyst');

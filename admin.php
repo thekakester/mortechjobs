@@ -14,7 +14,7 @@ $user=post('user');
 $pass=post('pass');
 $fname=post('fname');
 $lname=post('lname');
-$email=post('email');
+$manager=post('manager');
 $title=post('title');
 
 if($user&&$pass){
@@ -22,11 +22,19 @@ if($user&&$pass){
 	$pass=crypt($pass,false);
 	
 	//check that username doesn't already exist
-	$conn->query("INSERT INTO users(user,pass,fname,lname,email,title) VALUES('$user','$pass','$fname','$lname','$email','$title')");
+	$conn->query("INSERT INTO users(user,pass) VALUES('$user','$pass')");
+	$uid = $conn->insert_id;
+	$conn->query("INSERT INTO demographics(uid,fname,lname,title,manager) VALUES('$uid','$fname','$lname','$title',$manager)");
 	
 }
 
 //echo '<br>' . time();
+$managersSelection = "<select name='manager' class='form-control' >";
+$resultSet = $conn->query("SELECT id,user FROM users ORDER BY user");
+while ($row = $resultSet->fetch_assoc()) {
+	$managersSelection .= "<option value='$row[id]'>$row[user]</option>";
+}
+$managersSelection .= "</select>";
 
 ?>
 
@@ -79,10 +87,10 @@ if($user&&$pass){
 			<label name="user">Last Name</label><input class="form-control" type="text" name="lname" placeholder="Last Name">
 			</div>
 			<div class="form-group">
-			<label name="user">E-Mail</label><input class="form-control" type="text" name="email" placeholder="E-Mail">
+			<label name="user">Title</label><input class="form-control" type="text" name="title" placeholder="Title">
 			</div>
 			<div class="form-group">
-			<label name="user">Title</label><input class="form-control" type="text" name="title" placeholder="Title">
+			<label name="user">Manager</label><?php echo $managersSelection; ?>
 			</div>
 			<input type="submit" class="btn btn-success mb-2">
 		</form>
