@@ -94,7 +94,7 @@
 									<a href="/allparts.php">All Parts</a>
 								</li>
 								<li>
-									<a href="/addPart.php">Add Part</a>
+									<a href="/addpart.php">Add Part</a>
 								</li>
 							</ul>
                         </li>
