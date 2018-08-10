@@ -7,7 +7,7 @@
 session_start();
 
 //This is used when sending out emails with hyperlinks
-$server_ip = "http://168.192.1.131";
+$server_ip = "http://portal.local";
 
 $conn=new mysqli();
 $conn->connect("localhost","portal","p0rtalPass92","mortech_jobs");
