@@ -22,7 +22,7 @@ function partDetails() {
 			//Part Number
 			//$partNo = getPartNo($row);
 			$html.= "<button type='button' class='btn btn-success' style='float:right' 
-						onClick='document.getElementById(\"view\").style.display=\"none\";document.getElementById(\"edit\").style.display=\"table-row\";'>
+						onClick='window.location=\"addpart.php?pid=$row[id]\"'>
 						Edit <span class='glyphicon glyphicon-pencil'></span>
 					</button>";
 			$html .= "<table class='table table-bordered table-hover table-striped'>

@@ -15,8 +15,9 @@ function newPart() {
 		$optionList .= "<option value='$row[id]'>$row[description]</option>";
 	}
 	
-	$html="<form role='form' method='post'>
-			<div class='form-group'>
+	$html="<form role='form' method='post' id='partForm'>
+			<div class='form-group' id='partNumber'></div>
+            <div class='form-group'>
                 <label>Description</label>
                 <input type='test' class='form-control' name='description' autocomplete='off' required>
             </div>
@@ -77,22 +78,42 @@ function newPart() {
 						<label>Minimum Order Requirement</label>
 						<input type='text' class='form-control' name='minOrderReq' autocomplete='off'>
 					</div>
-					<div class='form-group'>
+					<div class='form-group' name='pooper'>
                         <label>Unit of Measure</label>";
 					$html .= autoCompleteTextbox("uom","class='form-control' name='uom' required");
                     $html .= "
                     </div>
 					<input type='submit' value='Add Part' class='btn btn-success mb-2'>
-				</form>
-				</div>
-				<!-- /.col-lg-6 (nested) -->
-			</div>
-			<!-- /.row (nested) -->
-		</div>
-		<!-- /.panel-body -->
-	</div>
-	<!-- /.panel -->                
-</html>";
+				</form>";
+
+				$editID = get('pid');
+				if ($editID) {
+					$resultSet = $conn->query("SELECT * FROM parts WHERE id='$editID' LIMIT 1");
+					if ($row = $resultSet->fetch_assoc()) {
+						$html .= "<script>
+							var f = document.getElementById('partForm');
+							f.description.value 	= '$row[description]';
+							f.category.value 		= '$row[category]';
+							f.commonCode.value 		= '$row[commonCode]';
+							f.spare.value 			= '$row[spare]';
+							f.cost.value 			= '$row[cost]';
+							f.price.value 			= '$row[price]';
+							f.vendor.value 			= '$row[vendor]';
+							f.vendorPartNo.value 	= '$row[vendorPartNo]';
+							f.vendorLeadTime.value  = '$row[vendorLeadTime]';
+							f.mortechLeadTime.value	= '$row[mortechLeadTime]';
+							f.sd1500.checked 		= $row[sd1500];
+							f.sd1500s.checked 		= $row[sd1500s];
+							f.sdx.checked 			= $row[sdx];
+							f.hd2500.checked 		= $row[hd2500];
+							f.hdx.checked 			= $row[hdx];
+							f.minOrderReq.value 	= '$row[minOrderReq]';
+							f.uom.value 			= '$row[uom]';
+
+
+						</script>";
+					}
+				}
 return $html;
 }
 
