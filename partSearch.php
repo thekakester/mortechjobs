@@ -4,22 +4,21 @@
 	
 	$searchValue = get("q");
 	
-	$q = "SELECT * FROM (parts JOIN part_aliases ON parts.id = part_aliases.partId JOIN vendors ON vendor=vendors.id)";
-	if ($searchValue) {
+	//$q = "SELECT * FROM (parts JOIN part_aliases ON parts.id = part_aliases.partId LEFT JOIN vendors ON vendor=vendors.id)";
+	$q = "SELECT DISTINCT parts.id,description,commonCode,category,alias FROM (parts JOIN part_aliases ON parts.id = part_aliases.partId LEFT JOIN vendors ON vendor=vendors.id)";
+	if	($searchValue) {
 		$q .= " WHERE description LIKE '$searchValue%' OR alias LIKE '$searchValue%' OR commonCode LIKE '$searchValue%' OR name LIKE '$searchValue%'";
 	}
-	//$q .= " ORDER BY id";
+	$q .= " ORDER BY id";
 	//echo $q;
 	$resultset=$conn->query($q);
 	
 	$id = uniqueID();
 	echo "<table id='$id' class='table table-bordered table-hover table-striped'>";
 	echo "<tr><th>Part Number</th>
+				<th>Alias</th>
 				<th>Category</th>
 				<th>Description</th>
-				<th>Spare</th>
-				<th>SD1500</th>
-				<th>HD2500</th>
 				</tr>";
 	while ($row=$resultset->fetch_assoc()){
 		//Part Number
@@ -33,7 +32,7 @@
 		}
 		
 		//spare
-		if ($row['spare']==1){
+		/*if ($row['spare']==1){
 			$spare="Yes";
 		} else {
 			$spare="No";
@@ -51,16 +50,17 @@
 			$hd2500="Yes";
 		} else {
 			$hd2500="No";
-		}
+		}*/
 		
 		echo "<tr>
 				<td><a href='part.php?pid=$row[id]'>$partNo</a></td>
+				<td><a href='part.php?pid=$row[id]'>$row[alias]</a></td>
 				<td>$cat</td>
-				<td><a href='part.php?pid=$row[id]'>$row[description]</a></td>
-				<td>$spare</td>
-				<td>$sd1500</td>
-				<td>$hd2500</td>
-			</tr>";
+				<td><a href='part.php?pid=$row[id]'>$row[description]</a></td>";
+				//<td>$spare</td>
+				//<td>$sd1500</td>
+				//<td>$hd2500</td>
+			//</tr>";
 	}
 	echo "</table>";
 	
