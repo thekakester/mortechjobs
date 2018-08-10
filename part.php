@@ -3,7 +3,7 @@
 include_once('util.php');
 include_once('loggedin.php');
 include_once('autocomplete.php');
-include_once('partlist.php');
+include_once('partList.php');
 
 
 include('top.php');
