@@ -230,7 +230,8 @@ function getPTOTotals($uid,$now) {
 	$endOfYear = strToTime("+1 year",$beginningOfYear);
 	
 	$ptoTotals = [0,0,0];	//Pending, Approved, Denied
-	$resultSet = $conn->query("SELECT COUNT(req_id),req_id FROM pto_requests WHERE uid=2 AND pto_utc >= $beginningOfYear AND pto_utc < $endOfYear GROUP BY req_id");
+	//$resultSet = $conn->query("SELECT COUNT(req_id),req_id FROM pto_requests WHERE uid=2 AND pto_utc >= $beginningOfYear AND pto_utc < $endOfYear GROUP BY req_id");
+	$resultSet = $conn->query("SELECT COUNT(req_id),req_id FROM pto_requests WHERE uid=$uid AND pto_utc >= $beginningOfYear AND pto_utc < $endOfYear GROUP BY req_id");
 	while ($row = $resultSet->fetch_array()) {
 		$count = $row[0];
 		$req_id = $row[1];
